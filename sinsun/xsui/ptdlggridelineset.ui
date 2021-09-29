@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ptdlggridelineset</class>
+ <widget class="QDialog" name="ptdlggridelineset">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>845</width>
+    <height>663</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#ptdlggridelineset{background-color:#4E4E4E;border:1px solid black}</string>
+  </property>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>610</y>
+     <width>845</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#303030;border:1px solid black;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_16">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>845</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#303030;color:#0ff;border:1px solid black;font-size:24px</string>
+   </property>
+   <property name="text">
+    <string> 引入引出线设置</string>
+   </property>
+  </widget>
+  <widget class="QScrollArea" name="scrollArea_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>50</y>
+     <width>641</width>
+     <height>540</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>622</width>
+      <height>950</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>950</height>
+     </size>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>11</y>
+       <width>601</width>
+       <height>921</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="2,8,2,8,2,8,2,8,1">
+      <item>
+       <widget class="QGroupBox" name="groupBox_9">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QPushButton" name="pushButton_9">
+         <property name="geometry">
+          <rect>
+           <x>560</x>
+           <y>0</y>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_12">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>471</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>   引入线</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBoxInLine">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>178</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;</string>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QLabel" name="label_2">
+         <property name="geometry">
+          <rect>
+           <x>21</x>
+           <y>20</y>
+           <width>36</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>类型：</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBoxInLineType">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>21</y>
+           <width>121</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>51</y>
+           <width>36</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>长度：</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxInLineLength">
+         <property name="geometry">
+          <rect>
+           <x>250</x>
+           <y>51</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+         <property name="maximum">
+          <double>100.000000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_4">
+         <property name="geometry">
+          <rect>
+           <x>21</x>
+           <y>50</y>
+           <width>36</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>角度：</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxInAngle">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>51</y>
+           <width>81</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+         <property name="maximum">
+          <double>360.000000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_5">
+         <property name="geometry">
+          <rect>
+           <x>21</x>
+           <y>80</y>
+           <width>36</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>半径：</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxInRadius">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>81</y>
+           <width>81</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBoxAddCircle">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>150</y>
+           <width>161</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>在引入线起点添加小圆孔</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_6">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>81</y>
+           <width>57</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>圆孔半径：</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxInCircleRadius">
+         <property name="geometry">
+          <rect>
+           <x>250</x>
+           <y>81</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>130</y>
+           <width>331</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-top:1px solid #676767;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_10">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QPushButton" name="pushButton_10">
+         <property name="geometry">
+          <rect>
+           <x>560</x>
+           <y>0</y>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_13">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>491</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>   引出线</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBoxOutLine">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>178</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;</string>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QLabel" name="label_7">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>21</y>
+           <width>54</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>类型：</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBoxOutLineType">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>20</y>
+           <width>131</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_8">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>50</y>
+           <width>54</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>长度：</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxOutLineLength">
+         <property name="geometry">
+          <rect>
+           <x>250</x>
+           <y>50</y>
+           <width>81</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_9">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>49</y>
+           <width>54</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>角度：</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxOutAngle">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>49</y>
+           <width>91</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_10">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>81</y>
+           <width>54</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>半径：</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxOutRadius">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>80</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBoxOffLight">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>140</y>
+           <width>111</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>引出线关光</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_17">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>331</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-top:1px solid #676767;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_11">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QPushButton" name="pushButton_11">
+         <property name="geometry">
+          <rect>
+           <x>560</x>
+           <y>0</y>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_14">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>511</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>   引线位置</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBoxLineLocation">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>179</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;</string>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QRadioButton" name="radioButtonAutoSelect">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>191</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>自动选择合适的引入位置</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButtonAccordLocation">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>100</y>
+           <width>221</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>按照图形总长设定统一位置（0~1）</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButtonChangeTypeOnly">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>140</y>
+           <width>341</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>不改变引线位置，只改变类型</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBoxCornerFirst">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>111</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>优先从顶点引入</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBoxEdgeFirst">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>70</y>
+           <width>121</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>优先从长边引入</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxSetLocation">
+         <property name="geometry">
+          <rect>
+           <x>250</x>
+           <y>100</y>
+           <width>81</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0ff;background-color:#393939;</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_12">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>34</height>
+         </size>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QPushButton" name="pushButton_12">
+         <property name="geometry">
+          <rect>
+           <x>560</x>
+           <y>0</y>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_15">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>511</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>   选项</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBoxLineSet">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>178</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;</string>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QCheckBox" name="checkBoxClosedPicOnly">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>10</y>
+           <width>171</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>仅作用于封闭图形</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBoxOuterMembraneOnly">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>40</y>
+           <width>181</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>仅作用于外膜图形</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBoxInsideMembraneOnly">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>70</y>
+           <width>201</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>仅作用于内膜图形</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBoxInterfaceCheck">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>100</y>
+           <width>151</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>引线干涉检查</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>620</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ptdlggridelineset</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>645</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>422</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ptdlggridelineset</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>645</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>422</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
