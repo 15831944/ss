@@ -155,6 +155,8 @@ string MncFileIo::generate_gcode()
                                +" J"+std::to_string(tempCenter.y-tempStartPoint.y);
                 }
                 resultGCode+=gUnit.generate_G(G02, _coord);
+                "GCodeTest";
+                "test";
             }
             else if(keySegments[j]->rtti()==RS2::EntityLine)//直线
                {
