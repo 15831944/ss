@@ -14,7 +14,6 @@ QList<int> M_FileFunction::range_layer(QListWidget *layer_cut)
             {
                 result.push_back(j);
             }
-
         }
     }
     return result;

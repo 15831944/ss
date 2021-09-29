@@ -15,6 +15,7 @@ public:
 
     M_FileFunction(MncFileData* val){m_file=val;};
 
+public:
     MncFileData* m_file;
 
     //图层实体排序

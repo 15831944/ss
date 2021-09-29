@@ -2,30 +2,16 @@
 #include "m_partfunction.h"
 #include "m_filefunction.h"
 
-shared_ptr<MncFileData> MncFileIo::generate_ncFile(const QList<RS_Entity *> &inPutEntities)
+void MncFileIo::generate_ncFile(const QList<RS_Entity *> &inPutEntities)
 {
-    //最终的结果文件
-    shared_ptr<MncFileData> result(new MncFileData());
-
-    //临时数据
-    result->m_coordinate_origin=RS_Vector(0,0);
+    //初始化m_file
+    m_file.m_segment_file.clear();
+    m_file.m_coordinate_origin=RS_Vector(0,0);
 
     RS_Polyline* back=new RS_Polyline(nullptr);
-    result->m_back_groud=back;
+    m_file.m_back_groud=back;
 
     //存储数据
-    for(int i=0;i<inPutEntities.size();++i)
-    {
-        MncSolidData tempSolidData;
-        tempSolidData.m_is_closed=true;
-        tempSolidData.m_is_inner=false;
-        tempSolidData.m_part=inPutEntities[i];
-
-        M_PartFunction tem_partFunction = M_PartFunction(tempSolidData);
-        tempSolidData=tem_partFunction.caculate_left_refpoints();
-        result->m_segment_file.push_back(tempSolidData);
-    }
-
     M_FileFunction fileFunction(&m_file);
     //图层排序
     QList<int> layer_range = fileFunction.range_layer(m_layerCut);
@@ -42,10 +28,8 @@ shared_ptr<MncFileData> MncFileIo::generate_ncFile(const QList<RS_Entity *> &inP
         M_PartFunction tem_partFunction = M_PartFunction(tempSolidData);
         //计算切入点
         tempSolidData=tem_partFunction.caculate_left_refpoints();
-        result->m_segment_file.push_back(tempSolidData);
+        m_file.m_segment_file.push_back(tempSolidData);
     }
-
-    return result;
 }
 
 string MncFileIo::generate_gcode()
@@ -155,8 +139,6 @@ string MncFileIo::generate_gcode()
                                +" J"+std::to_string(tempCenter.y-tempStartPoint.y);
                 }
                 resultGCode+=gUnit.generate_G(G02, _coord);
-                "GCodeTest";
-                "test";
             }
             else if(keySegments[j]->rtti()==RS2::EntityLine)//直线
                {
@@ -167,24 +149,32 @@ string MncFileIo::generate_gcode()
                    {
                        RS_Vector g01StartPoint=tempLine->getStartpoint();
                        RS_Vector g01EndPoint=tempLine->getEndpoint();
-
-                       std::string detaX="",detaY="";
-                       if(g01StartPoint.x!=g01EndPoint.x)
+                       std::string deta="";
+                       if(g01StartPoint.x!=g01EndPoint.x && g01StartPoint.y!=g01EndPoint.y)
                        {
-                           detaX+=(" X"+std::to_string(g01EndPoint.x-g01StartPoint.x));
+                           std::string detaX = "X"+std::to_string(g01EndPoint.x-g01StartPoint.x);
+                           std::string detaY = "Y"+std::to_string(g01EndPoint.y-g01StartPoint.y);
+                           deta = detaX + " " + detaY;
                        }
-                       if(g01StartPoint.y!=g01EndPoint.y)
+                       else if(g01StartPoint.x!=g01EndPoint.x)
                        {
-                           detaY+=(" Y"+std::to_string(g01EndPoint.y-g01StartPoint.y));
+                           std::string detaX = "X"+std::to_string(g01EndPoint.x-g01StartPoint.x);
+                           deta = detaX;
+                       }
+                       else
+                       {
+                           std::string detaY = "Y"+std::to_string(g01EndPoint.y-g01StartPoint.y);
+                           deta = detaY;
                        }
 
-                       resultGCode+=(detaX+detaY+"\n");
+                       resultGCode+=gUnit.generate_G(G01, deta);
                    }
                    //绝对坐标格式
                    else
                    {
                        RS_Vector g01EndPoint=tempLine->getEndpoint();
-                       resultGCode+=(" X"+std::to_string(g01EndPoint.x)+" Y"+std::to_string(g01EndPoint.y)+"\n");
+                       std::string _coord = "X"+std::to_string(g01EndPoint.x)+" Y"+std::to_string(g01EndPoint.y);
+                       resultGCode+=gUnit.generate_G(G01, _coord);
                    }
 
                    lastRecord=tempLine->getEndpoint();
@@ -192,39 +182,53 @@ string MncFileIo::generate_gcode()
                else if(keySegments[j]->rtti()==RS2::EntityArc)//圆弧
                {
                    shared_ptr<RS_Arc> tempArc=dynamic_pointer_cast<RS_Arc>(keySegments[j]);
+                   G_OPERATE _operate;
 
                    if(tempArc->isReversed())//顺时针为真
                    {
-                       resultGCode+="G02";
+                       _operate = G02;
                    }
                    else
                    {
-                       resultGCode+="G03";
+
+                       _operate = G03;
                    }
 
                    RS_Vector tempStartPoint=tempArc->getStartpoint();
                    RS_Vector tempEndPoint=tempArc->getEndpoint();
                    RS_Vector tempCenter=tempArc->getCenter();
                    //相对坐标格式
-                   if(m_commad==CRELATIVE)
+                   if(m_commad==MRELATIVE)
                    {
-                       std::string detaX="",detaY="";
-                       if(tempEndPoint.x!=tempStartPoint.x)
+                       std::string deta="";
+                       if(tempEndPoint.x!=tempStartPoint.x && tempEndPoint.y!=tempStartPoint.y)
                        {
-                           detaX+=(" X"+std::to_string(tempEndPoint.x-tempStartPoint.x));
+                           std::string detaX = "X"+std::to_string(tempEndPoint.x-tempStartPoint.x);
+                           std::string detaY = "Y"+std::to_string(tempEndPoint.y-tempStartPoint.y);
+                           deta = detaX + " " + detaY;
                        }
-                       if(tempEndPoint.y!=tempStartPoint.y)
+                       else if(tempEndPoint.x!=tempStartPoint.x)
                        {
-                           detaY+=(" Y"+std::to_string(tempEndPoint.y-tempStartPoint.y));
+                           std::string detaX = "X"+std::to_string(tempEndPoint.x-tempStartPoint.x);
+                           deta = detaX;
                        }
-                       resultGCode+=(detaX+detaY);
-                       resultGCode+=(" I"+std::to_string(tempCenter.x-tempStartPoint.x)+" J"+std::to_string(tempCenter.y-tempStartPoint.y)+"\n");
+                       else
+                       {
+                           std::string detaY = "Y"+std::to_string(tempEndPoint.y-tempStartPoint.y);
+                           deta = detaY;
+                       }
+                       deta += " I"+std::to_string(tempCenter.x-tempStartPoint.x)+" J"+std::to_string(tempCenter.y-tempStartPoint.y);
+                       resultGCode+=gUnit.generate_G(_operate, deta);
                    }
                    //绝对坐标格式
                    else
                    {
-                       resultGCode+=(" X"+std::to_string(tempEndPoint.x)+" Y"+std::to_string(tempEndPoint.y));
-                       resultGCode+=(" I"+std::to_string(tempCenter.x-tempStartPoint.x)+" J"+std::to_string(tempCenter.y-tempStartPoint.y)+"\n");
+                       std::string _coord = "";
+                       _coord = "X"+std::to_string(tempEndPoint.x)
+                               +" Y"+std::to_string(tempEndPoint.y)
+                               +" I"+std::to_string(tempCenter.x-tempStartPoint.x)
+                               +" J"+std::to_string(tempCenter.y-tempStartPoint.y);
+                       resultGCode+=gUnit.generate_G(_operate, _coord);
                    }
                    lastRecord=tempArc->getEndpoint();
                }
@@ -233,12 +237,9 @@ string MncFileIo::generate_gcode()
 
             }
         }
-        //关激光(可能带刀补)
-        resultGCode+=offLaser;
+        //关激光
+        resultGCode+=gUnit.generate_M(M08);
     }
-
-    //结束语句
-    resultGCode+="M02";
 
     return resultGCode;
 }
@@ -249,14 +250,15 @@ void MncFileIo::setLayerCut(QListWidget * layerCut)
 }
 
 
-string MGUnit::generate_lineNum()
+std::string MGUnit::generate_lineNum()
 {
     std::string result = "N";
     std::stringstream test;
     std::string str_line = std::to_string(m_lineNum);
-    test<< setw(3)<< setfill('0')<< str_line <<endl;
-    qDebug()<<QString::fromStdString(test.str());
     m_lineNum = m_lineNum + 10;
+    test<< setw(3)<< setfill('0')<< str_line;
+    result += test.str();
+    return result;
 }
 
 string MGUnit::generate_M(M_OPERATE _operate, int _layer)
@@ -273,14 +275,17 @@ string MGUnit::generate_M(M_OPERATE _operate, int _layer)
             std::string layer = " K" + std::to_string(_layer);
             result = result + layer;
         }
+        break;
     }
     case M08:
     {
         result = result + " M08";
+        break;
     }
 
     }
     result += "\n";
+    return result;
 }
 
 string MGUnit::generate_G(G_OPERATE _operate, string _coord)
@@ -292,27 +297,34 @@ string MGUnit::generate_G(G_OPERATE _operate, string _coord)
     case G00:
     {
         result = result + " G00" + " " + _coord;
+        break;
     }
     case G01:
     {
         result = result + " G01" + " " + _coord + " F$LINE_VEEL$ E$LINE_ACC$ E-$LINE_DEC$";
+        break;
     }
     case G02:
     {
         result = result + " G02" + " " + _coord + " $CIRC_VEEL$ E$CIRC_ACC$ E-$CIRC_DEC$";
+        break;
     }
     case G03:
     {
         result = result + " G03" + " " + _coord + " $CIRC_VEEL$ E$CIRC_ACC$ E-$CIRC_DEC$";
+        break;
     }
     case G90:
     {
         result = result + " G90";
+        break;
     }
     case G91:
     {
         result = result + " G91";
+        break;
     }
     }
     result += "\n";
+    return result;
 }

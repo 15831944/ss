@@ -153,7 +153,7 @@ void ss_LayerCut::accepted()
     {
         QVariant tem_var = m_layerCutList->item(j)->data(Qt::UserRole);
         ss_LayerCutItem* tem_layerItem = tem_var.value<ss_LayerCutItem*>();
-        qDebug()<<tem_layerItem->getEvaporate()<<tem_layerItem->getHanding()<<tem_layerItem->getSequence();
+        //qDebug()<<tem_layerItem->getEvaporate()<<tem_layerItem->getHanding()<<tem_layerItem->getSequence();
     }
 
     auto appWin=QC_ApplicationWindow::getAppWindow();
@@ -162,7 +162,20 @@ void ss_LayerCut::accepted()
 
     MncFileIo fileIO;
     fileIO.setLayerCut(m_layerCutList);
-    fileIO.generate_ncFile(graphic->getEntityList());
+
+    //过滤掉没有设置图层的实体
+    QList<RS_Entity*> entities_hasLayer;
+    auto entityList = graphic->getEntityList();
+    foreach(auto entity, entityList)
+    {
+        if(entity->m_nc_information.layer_cut>=0 && entity->isVisible())
+        {
+            entities_hasLayer.push_back(entity);
+        }
+    }
+
+    fileIO.generate_ncFile(entities_hasLayer);
+    qDebug() << QString::fromStdString(fileIO.generate_gcode());
 }
 
 QSet<int> ss_LayerCut::checkUsedState()

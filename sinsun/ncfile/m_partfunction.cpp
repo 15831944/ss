@@ -15,7 +15,6 @@ MncSolidData M_PartFunction::caculate_left_refpoints()
         RS_Vector o = tempPtr->getCenter();
         double r = tempPtr->getRadius();
         RS_Vector CirclePoint(o.x-r,o.y);
-
         m_solid.m_cutin_point_inPart=CirclePoint;
     }
     else if(tempPtr->rtti()==RS2::EntityPolyline)

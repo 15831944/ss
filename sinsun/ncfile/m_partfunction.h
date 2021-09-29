@@ -28,7 +28,6 @@ public:
     //根据冷却点等对数据进行分割,true为顺时针
     vector<shared_ptr<RS_Entity>> caculate_data_segmentation(bool direction=true);
 
-
     //返回所有点
     vector<RS_Vector> get_all_rsvector();
 };

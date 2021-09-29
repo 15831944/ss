@@ -101,11 +101,9 @@ public:
     void setLayerCut(QListWidget*);
 
     //将原始数据排序、生成引线、计算空位移行程
-    shared_ptr<MncFileData> generate_ncFile(const QList<RS_Entity *> &inPutEntities);
+    void generate_ncFile(const QList<RS_Entity *> &inPutEntities);
     //生成G代码
     std::string generate_gcode();
-
-
 };
 
 class MGUnit

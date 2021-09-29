@@ -60,7 +60,7 @@ class QString;
  */
 struct NcInformation
 {
-    int layer_cut =0;
+    int layer_cut =-1;
 };
 
 class RS_Entity : public RS_Undoable {
