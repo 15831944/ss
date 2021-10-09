@@ -194,7 +194,7 @@ QG_ActionHandler::QG_ActionHandler(QObject* parent)
       m_fileOpen(new ss_OpenFilePre((QC_ApplicationWindow *)(this->parent()))),
       m_dlgGuideLines(new ptdlggridelineset((QC_ApplicationWindow *)(this->parent()))),
       m_dlgColdPoints(new ptdlgcoldpoints((QC_ApplicationWindow *)(this->parent()))),
-      m_dlgGCode(new ptdlggcodegenerate((QC_ApplicationWindow *)(this->parent())))
+      m_dlgGCode(new MDlgExportGCode((QC_ApplicationWindow *)(this->parent())))
 {
     RS_DEBUG->print("QG_ActionHandler::QG_ActionHandler");
     RS_DEBUG->print("QG_ActionHandler::QG_ActionHandler: OK");
@@ -2260,7 +2260,7 @@ void QG_ActionHandler::slotExportGCode()
 //        file.close();
 //    }
 
-    m_dlgGCode->set_nc_file(*(m_app->m_result_file_list[m_app->getDocument()]));
+    //*(m_app->m_result_file_list[m_app->getDocument()];
     m_dlgGCode->show();
 }
 
@@ -2297,13 +2297,13 @@ void QG_ActionHandler::slotAddFactory(){
 void QG_ActionHandler::slotYinXian()
 {
     m_dlgGuideLines->show();
-    m_dlgGuideLines->m_ncFile=m_app->m_result_file_list[m_app->getDocument()];
+    //m_dlgGuideLines->m_ncFile=m_app->m_result_file_list[m_app->getDocument()];
 }
 
 void QG_ActionHandler::slotLengQue()
 {
     m_dlgColdPoints->show();
-    m_dlgColdPoints->m_ncFile=m_app->m_result_file_list[m_app->getDocument()];
+    //m_dlgColdPoints->m_ncFile=m_app->m_result_file_list[m_app->getDocument()];
 }
 
 void QG_ActionHandler::slotSort(){

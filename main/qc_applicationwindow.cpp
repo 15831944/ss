@@ -3875,7 +3875,7 @@ QC_MDIWindow* QC_ApplicationWindow::getWindowWithDoc(const RS_Document* doc)
 void QC_ApplicationWindow::ptrefresh()
 {
     ptShowNcFile show((RS_Graphic*)this->getDocument());
-    show.m_ncFile=m_result_file_list[this->getDocument()];
+    //show.m_ncFile=m_result_file_list[this->getDocument()];
     show.redraw_ncfile();
 
     //刷新

@@ -83,7 +83,7 @@ struct MncSolidData
 //ncFile数据
 struct MncFileData
 {
-    QList<MncSolidData> m_segment_file;//加工段,包含加工快
+    QList<MncSolidData> m_segment_file;//加工段,包含加工块
     RS_Vector m_coordinate_origin;//坐标原点
     RS_Polyline* m_back_groud;//板件
 };
@@ -100,8 +100,13 @@ public:
     //初始化函数
     void setLayerCut(QListWidget*);
 
+    //设置MncFileData
+    void setData(MncFileData _file){
+        m_file = _file;
+    }
+
     //将原始数据排序、生成引线、计算空位移行程
-    void generate_ncFile(const QList<RS_Entity *> &inPutEntities);
+    MncFileData generate_ncFile(const QList<RS_Entity *> &inPutEntities);
     //生成G代码
     std::string generate_gcode();
 };
@@ -112,6 +117,7 @@ private:
     int m_lineNum = 0;
 
     std::string generate_lineNum();
+    int m_layer = -1;
 public:
     std::string generate_M(M_OPERATE _operate, int layer = -1);//生成M07,M08指令
     std::string generate_G(G_OPERATE _operate, std::string _coord = "");

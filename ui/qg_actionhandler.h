@@ -33,9 +33,10 @@
 #include "sinsun/ss_arrange.h"
 #include "sinsun/ss_sortwidget.h"
 #include "sinsun/xsui/ptdlggridelineset.h"
-#include "sinsun/xsui/ptdlggcodegenerate.h"
+//#include "sinsun/xsui/ptdlggcodegenerate.h"
 #include "sinsun/xsui/ptdlgcoldpoints.h"
 #include "sinsun/xsui/ptdlgimitate.h"
+#include "sinsun/ncfile/mdlgexportgcode.h"
 
 class QG_SnapToolBar;
 class RS_Layer;
@@ -315,7 +316,7 @@ private:
     ss_OpenFilePre* m_fileOpen;
     ss_Arrange *arrangeWidget;
     ss_SortWidget *sortWidget;
-    ptdlggcodegenerate* m_dlgGCode;
+    MDlgExportGCode* m_dlgGCode;
     ptdlggridelineset* m_dlgGuideLines;
     ptdlgcoldpoints* m_dlgColdPoints;
     ptdlgimitate* m_dlgImitate;

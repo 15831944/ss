@@ -2,7 +2,7 @@
 #include "m_partfunction.h"
 #include "m_filefunction.h"
 
-void MncFileIo::generate_ncFile(const QList<RS_Entity *> &inPutEntities)
+MncFileData MncFileIo::generate_ncFile(const QList<RS_Entity *> &inPutEntities)
 {
     //初始化m_file
     m_file.m_segment_file.clear();
@@ -30,6 +30,7 @@ void MncFileIo::generate_ncFile(const QList<RS_Entity *> &inPutEntities)
         tempSolidData=tem_partFunction.caculate_left_refpoints();
         m_file.m_segment_file.push_back(tempSolidData);
     }
+    return m_file;
 }
 
 string MncFileIo::generate_gcode()
@@ -275,11 +276,13 @@ string MGUnit::generate_M(M_OPERATE _operate, int _layer)
             std::string layer = " K" + std::to_string(_layer);
             result = result + layer;
         }
+        m_layer = _layer;
         break;
     }
     case M08:
     {
         result = result + " M08";
+        m_layer = -1;
         break;
     }
 
@@ -301,17 +304,26 @@ string MGUnit::generate_G(G_OPERATE _operate, string _coord)
     }
     case G01:
     {
-        result = result + " G01" + " " + _coord + " F$LINE_VEEL$ E$LINE_ACC$ E-$LINE_DEC$";
+        result = result + " G01" + " " + _coord
+                + " F$LINE_VEL_" + std::to_string(m_layer) + "$"
+                + " E$LINE_ACC_" + std::to_string(m_layer) + "$"
+                + " E$LINE_DEC_" + std::to_string(m_layer) + "$";
         break;
     }
     case G02:
     {
-        result = result + " G02" + " " + _coord + " $CIRC_VEEL$ E$CIRC_ACC$ E-$CIRC_DEC$";
+        result = result + " G02" + " " + _coord
+                + " F$CIRC_VEL_" + std::to_string(m_layer) + "$"
+                + " E$CIRC_ACC_" + std::to_string(m_layer) + "$"
+                + " E$CIRC_DEC_" + std::to_string(m_layer) + "$";
         break;
     }
     case G03:
     {
-        result = result + " G03" + " " + _coord + " $CIRC_VEEL$ E$CIRC_ACC$ E-$CIRC_DEC$";
+        result = result + " G03" + " " + _coord
+                + " F$CIRC_VEL_" + std::to_string(m_layer) + "$"
+                + " E$CIRC_ACC_" + std::to_string(m_layer) + "$"
+                + " E$CIRC_DEC_" + std::to_string(m_layer) + "$";
         break;
     }
     case G90:

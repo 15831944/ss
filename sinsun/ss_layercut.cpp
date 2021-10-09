@@ -44,7 +44,7 @@ ss_LayerCut::ss_LayerCut(QWidget *parent) :
         item->setSizeHint(QSize(ui->listWidget->sizeHint().width(), 70));
     }
 
-    connect(m_layerCutList, &QListWidget::currentItemChanged, this, &ss_LayerCut::currentLayerChanged);
+    connect(m_layerCutList, &QListWidget::itemClicked, this, &ss_LayerCut::currentLayerChanged);
     connect(ui->pushButton_craft, &QPushButton::clicked, this, &ss_LayerCut::showCraftWindow);
 }
 
@@ -53,7 +53,29 @@ ss_LayerCut::~ss_LayerCut()
     delete ui;
 }
 
-void ss_LayerCut::currentLayerChanged(QListWidgetItem *current, QListWidgetItem *previous)
+void ss_LayerCut::updateNcFile()
+{
+    auto appWin=QC_ApplicationWindow::getAppWindow();
+    RS_Document* d = appWin->getDocument();
+    RS_Graphic* graphic = (RS_Graphic*)d;
+
+    MncFileIo fileIO;
+    fileIO.setLayerCut(m_layerCutList);
+
+    //过滤掉没有设置图层的实体
+    QList<RS_Entity*> entities_hasLayer;
+    auto entityList = graphic->getEntityList();
+    foreach(auto entity, entityList)
+    {
+        if(entity->m_nc_information.layer_cut>=0 && entity->isVisible())
+        {
+            entities_hasLayer.push_back(entity);
+        }
+    }
+    appWin->m_result_file_list[appWin->getDocument()] = std::make_shared<MncFileData>(fileIO.generate_ncFile(entities_hasLayer));
+}
+
+void ss_LayerCut::currentLayerChanged(QListWidgetItem *current)
 {
     auto appWin=QC_ApplicationWindow::getAppWindow();
     RS_Document* d = appWin->getDocument();
@@ -71,6 +93,7 @@ void ss_LayerCut::currentLayerChanged(QListWidgetItem *current, QListWidgetItem 
             entity->m_nc_information.layer_cut = m_layerCutList->currentRow();
         }
     }
+    updateNcFile();
     graphic->update();
 }
 
@@ -155,27 +178,7 @@ void ss_LayerCut::accepted()
         ss_LayerCutItem* tem_layerItem = tem_var.value<ss_LayerCutItem*>();
         //qDebug()<<tem_layerItem->getEvaporate()<<tem_layerItem->getHanding()<<tem_layerItem->getSequence();
     }
-
-    auto appWin=QC_ApplicationWindow::getAppWindow();
-    RS_Document* d = appWin->getDocument();
-    RS_Graphic* graphic = (RS_Graphic*)d;
-
-    MncFileIo fileIO;
-    fileIO.setLayerCut(m_layerCutList);
-
-    //过滤掉没有设置图层的实体
-    QList<RS_Entity*> entities_hasLayer;
-    auto entityList = graphic->getEntityList();
-    foreach(auto entity, entityList)
-    {
-        if(entity->m_nc_information.layer_cut>=0 && entity->isVisible())
-        {
-            entities_hasLayer.push_back(entity);
-        }
-    }
-
-    fileIO.generate_ncFile(entities_hasLayer);
-    qDebug() << QString::fromStdString(fileIO.generate_gcode());
+    updateNcFile();
 }
 
 QSet<int> ss_LayerCut::checkUsedState()

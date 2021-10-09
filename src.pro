@@ -249,6 +249,7 @@ HEADERS += \
     sinsun/ncfile/m_filefunction.h \
     sinsun/ncfile/m_ncfile.h \
     sinsun/ncfile/m_partfunction.h \
+    sinsun/ncfile/mdlgexportgcode.h \
     sinsun/partpreview.h \
     sinsun/ss_arrange.h \
 #    sinsun/ss_arrange.h \
@@ -441,6 +442,7 @@ SOURCES += \
     sinsun/ncfile/m_filefunction.cpp \
     sinsun/ncfile/m_ncfile.cpp \
     sinsun/ncfile/m_partfunction.cpp \
+    sinsun/ncfile/mdlgexportgcode.cpp \
     sinsun/partpreview.cpp \
     sinsun/ss_arrange.cpp \
 #    sinsun/ss_arrange.cpp \
@@ -1025,6 +1027,7 @@ FORMS = ui/forms/qg_commandwidget.ui \
     sinsun/arrangement.ui \
 #    sinsun/arrangement.ui \
 #    sinsun/partpreview.ui \
+    sinsun/ncfile/mdlgexportgcode.ui \
     sinsun/partpreview.ui \
     sinsun/ss_arrange.ui \
 #    sinsun/ss_arrange.ui \

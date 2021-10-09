@@ -48,8 +48,10 @@ private:
     ss_CraftConfig* m_craftConfig = NULL;
     QList<QString> m_sequenceUsed;
 
+    void updateNcFile();
+
 public slots:
-    void currentLayerChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void currentLayerChanged(QListWidgetItem *current);
     void showCraftWindow();
     void updateSequence(QString text);
     void accepted();

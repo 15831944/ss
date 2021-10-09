@@ -40,11 +40,12 @@
 #include "framelesshelper.h"
 #include "title_bar.h"
 
-#include "sinsun/arrangement.h"
-#include "sinsun/ss_arrangewidget.h"
-#include "sinsun/ss_sortwidget.h"
+//#include "sinsun/arrangement.h"
+//#include "sinsun/ss_arrangewidget.h"
+//#include "sinsun/ss_sortwidget.h"
 
-#include "sinsun/xstest/ncfile.h"
+//#include "sinsun/xstest/ncfile.h"
+#include "sinsun/ncfile/m_ncfile.h"
 
 
 
@@ -467,7 +468,7 @@ private:
     arrangement* showArrangement;
 
 public:
-     QMap<RS_Document*,std::shared_ptr<ncFileData>> m_result_file_list;
+     QMap<RS_Document*,std::shared_ptr<MncFileData>> m_result_file_list;
 
 
 };
